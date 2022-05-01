@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :customers,skip: [:passwords,], controllers: {
+  devise_for :customers, skip: [:passwords], controllers: {
     registrations: "customer/registrations",
     sessions: 'customer/sessions'
   }
@@ -9,8 +9,13 @@ Rails.application.routes.draw do
   }
   
   scope module: :customer do
-    root to 'homes/top'
-    resources :customers
+    root to: 'homes#top'
+    get 'homes/about'
+    get 'customers/mypage'
+  end
+  
+  namespace :admin do
+    get 'homes/top'
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
