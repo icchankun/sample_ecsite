@@ -1,4 +1,4 @@
 class Customer::CustomersController < ApplicationController
-  def mypage
+  def show
   end
 end
