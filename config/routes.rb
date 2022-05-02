@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :customers, skip: [:passwords], controllers: {
-    registrations: "customer/registrations",
-    sessions: 'customer/sessions'
-  }
-
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
@@ -12,7 +7,14 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get 'about' => 'homes#about'
     get 'customers/mypage' => 'customers#show'
+    get 'customers/edit' => 'customers#edit'
+    patch 'customers' => 'customers#update'
   end
+  
+  devise_for :customers, skip: [:passwords], controllers: {
+    registrations: "customer/registrations",
+    sessions: 'customer/sessions'
+  }
   
   namespace :admin do
     get '/' => 'homes#top'
