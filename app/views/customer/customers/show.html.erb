@@ -1,10 +1,10 @@
 <h2>マイページ</h2>
-<div>
+<div class="box">
   <h3>登録情報</h3>
-  <%= link_to "編集", customers_edit_path, class: "btn btn-sm btn-success" %>
+  <%= link_to "編集する", edit_customers_path, class: "btn btn-sm btn-success" %>
 </div>
 
-<table>
+<table class="table table-striped">
   <tbody>
     <tr>
       <th>氏名</th>
@@ -37,10 +37,10 @@
 
 <div>
   <h3>配送先</h3>
-  <p>一覧を見る</p>
+  <span class="btn btn-sm btn-primary">一覧を見る</span>
 </div>
 
 <div>
   <h3>注文履歴</h3>
-  <p>一覧を見る</p>
+  <span class="btn btn-sm btn-primary">一覧を見る</span>
 </div>

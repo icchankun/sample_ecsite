@@ -6,49 +6,60 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <header>
-      <ul>
-        <% if customer_signed_in? %>
-          <li>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <% if customer_signed_in? %>
+          <span>
             <%= link_to "ロゴ", root_path %>
-          </li>
-          <li>
-            <%= link_to "マイページ", customers_mypage_path %>
-          </li>
-          <li>商品一覧</li>
-          <li>カート</li>
-          <li>
-            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-          </li>
-        <% elsif admin_signed_in? %>
-          <li>
+          </span>
+          <% elsif admin_signed_in? %>
+          <span>
             <%= link_to "ロゴ", admin_path %>
-          </li>
-          <li>商品一覧</li>
-          <li>会員一覧</li>
-          <li>注文履歴一覧</li>
-          <li>ジャンル一覧</li>
-          <li>
-            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-          </li>
-        <% else %>
-          <li>
+          </span>
+          <% else %>
+          <span>
             <%= link_to "ロゴ", root_path %>
-          </li>
-          <li>商品一覧</li>
-          <li>
-            <%= link_to "新規登録", new_customer_registration_path %>
-          </li>
-          <li>
-            <%= link_to "ログイン", new_customer_session_path %>
-          </li>
-        <% end %>
-      </ul>
+          </span>
+          <% end %>
+          
+          <ul class="navbar-nav ml-auto">
+            <% if customer_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "マイページ", customers_mypage_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item"><span class="nav-link">商品一覧</span></li>
+              <li class="nav-item"><span class="nav-link">カート</span></li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li class="nav-item"><span class="nav-link">商品一覧</span></li>
+              <li class="nav-item">
+                <%= link_to "会員一覧", admin_customers_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item"><span class="nav-link">注文履歴一覧</span></li>
+              <li class="nav-item"><span class="nav-link">ジャンル一覧</span></li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "nav-link" %>
+              </li>
+            <% else %>
+              <li class="nav-item"><span class="nav-link">商品一覧</span></li>
+              <li class="nav-item">
+                <%= link_to "新規登録", new_customer_registration_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_customer_session_path, class: "nav-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </nav>
     </header>
     <%= yield %>
   </body>
