@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'items/index'
+    get 'items/new'
+    get 'items/show'
+    get 'items/edit'
+  end
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
@@ -6,6 +12,7 @@ Rails.application.routes.draw do
   scope module: :customer do
     root to: 'homes#top'
     get 'about' => 'homes#about'
+    
     resource :customers, only: [:edit, :update] do
       collection do
         get 'confirm'
@@ -13,6 +20,8 @@ Rails.application.routes.draw do
       end
     end
     get 'customers/mypage' => 'customers#show'
+    
+    resources :items, only: [:index, :show]
   end
   
   devise_for :customers, skip: [:passwords], controllers: {
@@ -23,6 +32,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'homes#top'
     resources :customers, only: [:index, :show, :edit, :update]
+    resources :items, only: [:index, :new, :create, :show, :edit, :update]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
