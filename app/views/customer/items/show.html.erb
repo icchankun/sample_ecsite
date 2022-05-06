@@ -1,2 +1,6 @@
-<h1>Customer::Items#show</h1>
-<p>Find me in app/views/customer/items/show.html.erb</p>
+<div class="container">
+    <%= image_tag @item.get_image %>
+    <h2><%= @item.name %></h2>
+    <p><%= @item.caption %></p>
+    <p>￥<%= (@item.price * 1.1).to_i.to_s(:delimited) %><span>(税込)</span></p>
+</div>
