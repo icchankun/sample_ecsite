@@ -1,9 +1,39 @@
 @import '~bootstrap/scss/bootstrap';
 
+html,
+body,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: none;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+
 h3 {
     display: inline-block;
 }
 
 .box {
     display: flex;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    width: 30%;
+    margin-right: 5%;
+}
+
+.item_image {
+    width: 100%;
 }
