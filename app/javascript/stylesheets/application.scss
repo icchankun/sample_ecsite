@@ -37,3 +37,13 @@ h3 {
 .item_image {
     width: 100%;
 }
+
+.cart_item-image {
+  width: 50px;
+  height: auto;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}

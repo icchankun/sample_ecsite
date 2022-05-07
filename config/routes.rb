@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :customer do
+    get 'cart_items/index'
+  end
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
     sessions: "admin/sessions"
   }
@@ -16,6 +19,12 @@ Rails.application.routes.draw do
     get 'customers/mypage' => 'customers#show'
 
     resources :items, only: [:index, :show]
+    
+    resources :cart_items, only: [:index, :create, :update, :destroy] do
+      collection do
+        delete 'destroy_all'
+      end
+    end
   end
 
   devise_for :customers, skip: [:passwords], controllers: {

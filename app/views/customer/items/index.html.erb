@@ -7,7 +7,7 @@
       <%= link_to item_path(item.id) do %>
         <p><%= item.name %></p>
       <% end %>
-      <p>￥<%= (item.price * 1.1).to_i.to_s(:delimited) %></p>
+      <p>￥<%= item.with_tax_price %></p>
     </div>
     <% end %>
   </div>
