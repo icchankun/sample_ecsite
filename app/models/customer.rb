@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
   
   has_many :cart_items, dependent: :destroy
   has_many :addresses, dependent: :destroy
+  has_many :orders, dependent: :destroy
   
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -14,4 +15,12 @@ class Customer < ApplicationRecord
   validates :post_code, presence: true
   validates :address, presence: true
   validates :phone_number, presence: true
+  
+  def address_display
+  '〒' + post_code + ' ' + address + ' ' + first_name + last_name
+  end
+  
+  def full_name
+   first_name + last_name
+  end
 end
