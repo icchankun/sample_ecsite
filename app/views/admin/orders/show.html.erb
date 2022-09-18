@@ -1,0 +1,76 @@
+<h2>注文履歴詳細</h2>
+<table class="table">
+  <tbody>
+    <tr>
+      <th>購入者</th>
+      <td><%= @order.name %></td>
+    </tr>
+    <tr>
+      <th>注文日</th>
+      <td><%= @order.created_at.strftime('%Y/%m/%d') %></td>
+    </tr>
+    <tr>
+      <th>配送先</th>
+      <td><%= @order.address_display %></td>
+    </tr>
+    <tr>
+      <th>支払い方法</th>
+      <td><%= @order.payment_method_i18n %></td>
+    </tr>
+    <tr>
+      <th>注文ステータス</th>
+      <%= form_with model: @order, url: admin_order_path(@order.id) do |f| %>
+        <td>
+          <%= f.select :status, Order.statuses.keys.map {|k| [I18n.t("enums.order.status.#{k}"), k]}, {}, {class: "form-control"} %>
+          <%= f.submit "更新", class: "btn btn-success" %>
+        </td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>
+
+<div class="d-flex justify-content-between w-100">
+  <table class="table w-60">
+    <thead>
+      <th>商品名</th>
+      <th>単価</th>
+      <th>数量</th>
+      <th>小計</th>
+      <th>制作ステータス</th>
+    </thead>
+    <tbody>
+      <% @sum = 0 %>
+      <% @order_details.each do |order_detail| %>
+      <tr>
+        <td><%= order_detail.item.name %></td>
+        <td><%= order_detail.price %></td>
+        <td><%= order_detail.amount %></td>
+        <td><%= order_detail.subtotal %></td>
+        <%= form_with model: [@order, order_detail], url: admin_order_order_detail_path(@order.id, order_detail.id) do |f| %>
+          <td>
+            <%= f.select :making_status, OrderDetail.making_statuses.keys.map {|k| [I18n.t("enums.order_detail.making_status.#{k}"), k]}, {}, {class: "form-control"} %>
+            <%= f.submit "更新", class: "btn btn-success" %>
+          </td>
+        <% end %>
+      </tr>
+    <% @sum += order_detail.subtotal %>
+    <% end %>
+    </tbody>
+  </table>
+  <table class="table w-25">
+    <tbody>
+      <tr>
+        <th>商品合計</th>
+        <td><%= @sum %>円</td>
+      </tr>
+      <tr>
+        <th>送料</th>
+        <td><%= @order.shipping_cost %>円</td>
+      </tr>
+      <tr>
+        <th>請求金額合計</th>
+        <td><%= @order.total_payment %>円</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

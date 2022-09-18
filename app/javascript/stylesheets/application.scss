@@ -1,0 +1,49 @@
+@import '~bootstrap/scss/bootstrap';
+
+html,
+body,
+p,
+ul,
+li {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: none;
+  vertical-align: bottom;
+  max-width: 100%;
+}
+
+
+h3 {
+    display: inline-block;
+}
+
+.box {
+    display: flex;
+}
+
+.items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item {
+    width: 25%;
+    margin-right: 5%;
+}
+
+.item_image {
+    width: 100%;
+}
+
+.cart_item-image {
+  width: 50px;
+  height: auto;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}

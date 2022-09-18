@@ -1,0 +1,29 @@
+<div class="container d-flex">
+  <div class="genres w-30 mr-5">
+    <h3 class="border mb-0">ジャンル検索</h3>
+    <div class="border">
+      <% @genres.each do |genre| %>
+      <div class="genre">
+        <%= link_to items_path(id: genre.id) do %>
+          <span><%= genre.name %></span>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <div class="flex-fill">
+    <h2>商品一覧</h2><span>(全<%= @items.size %>件)</span>
+    <div class="items">
+      <% @items.each do |item| %>
+      <div class="item">
+        <%= image_tag item.get_image, class: "item_image" %>
+        <%= link_to item_path(item.id) do %>
+          <p><%= item.name %></p>
+        <% end %>
+        <p>￥<%= item.with_tax_price %></p>
+      </div>
+      <% end %>
+    </div>
+  </div>
+    

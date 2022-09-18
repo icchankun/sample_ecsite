@@ -1,0 +1,15 @@
+<div class="container">
+    <%= image_tag @item.get_image, class: "w-25" %>
+    <h2><%= @item.name %></h2>
+    <p><%= @item.caption %></p>
+    <p>￥<%= @item.with_tax_price %><span>(税込)</span></p>
+    <%= form_with model: @cart_item do |f| %>
+      <%= f.hidden_field :item_id, value: @item.id %>
+      <div class="form-group">
+        <%= f.select :amount, *[1..10], {}, {class: "form-control w-25"} %>
+      </div>
+       <div class="form-group">
+        <%= f.submit "カートに入れる", class: "btn btn-success" %>
+      </div>
+    <% end %>
+</div>
